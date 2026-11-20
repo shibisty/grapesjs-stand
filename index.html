@@ -1,0 +1,817 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>GrapesJS — все официальные бесплатные плагины</title>
+
+    <!-- =========================================================
+         GRAPESJS CORE (CSS)
+
+         Важно: версия core и версии плагинов должны быть
+         согласованы. Берём 0.21.13 — последний релиз ветки 0.21,
+         под которую делались и тестировались официальные плагины
+         GrapesJS (батч публикаций июнь–октябрь 2023).
+    ========================================================== -->
+
+    <link
+        rel="stylesheet"
+        href="https://unpkg.com/grapesjs@0.21.13/dist/css/grapes.min.css"
+    >
+
+    <!--
+         Grapick CSS — ОБЯЗАТЕЛЕН для grapesjs-style-gradient
+         и grapesjs-style-bg (пикер градиента/фона). Без него
+         виджет градиента отображается совсем без стилей —
+         именно это и выглядело "криво".
+    -->
+    <link
+        rel="stylesheet"
+        href="https://unpkg.com/grapick@0.1.13/dist/grapick.min.css"
+    >
+
+    <style>
+        html,
+        body {
+            margin: 0;
+            height: 100%;
+        }
+
+        #gjs {
+            height: 100vh;
+        }
+
+        /* Обёртка для демо-секций каждого плагина в холсте */
+        .demo-section {
+            padding: 60px 0;
+            border-top: 1px dashed #d8dee6;
+        }
+
+        .demo-section .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 30px;
+        }
+
+        .demo-tag {
+            display: inline-block;
+            margin-bottom: 18px;
+            padding: 4px 10px;
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: .04em;
+            text-transform: uppercase;
+            color: #fff;
+            background: #4b5563;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+
+<body>
+
+<div id="gjs"></div>
+
+
+<!-- =========================================================
+     CORE
+========================================================= -->
+
+<script src="https://unpkg.com/grapesjs@0.21.13/dist/grapes.min.js"></script>
+
+
+<!-- =========================================================
+     ОФИЦИАЛЬНЫЕ БЕСПЛАТНЫЕ ПЛАГИНЫ GRAPESJS
+     (все версии зафиксированы и согласованы между собой)
+========================================================= -->
+
+<!-- Пресет: базовый набор блоков + просмотр/импорт кода + тема -->
+<script src="https://unpkg.com/grapesjs-preset-webpage@1.0.3/dist/index.js"></script>
+
+<!-- Базовые блоки: текст, изображение, видео, карта, колонки -->
+<script src="https://unpkg.com/grapesjs-blocks-basic@1.0.2/dist/index.js"></script>
+
+<!-- Формы: form, input, textarea, select, checkbox, radio, button -->
+<script src="https://unpkg.com/grapesjs-plugin-forms@2.0.6/dist/index.js"></script>
+
+<!-- Навигационное меню -->
+<script src="https://unpkg.com/grapesjs-navbar@1.0.2/dist/index.js"></script>
+
+<!-- Вкладки (tabs) -->
+<script src="https://unpkg.com/grapesjs-tabs@1.0.6/dist/grapesjs-tabs.min.js"></script>
+
+<!-- Таймер обратного отсчёта -->
+<script src="https://unpkg.com/grapesjs-component-countdown@1.0.2/dist/index.js"></script>
+
+<!-- Произвольный HTML/JS-код -->
+<script src="https://unpkg.com/grapesjs-custom-code@1.0.2/dist/index.js"></script>
+
+<!-- Всплывающая подсказка (tooltip) -->
+<script src="https://unpkg.com/grapesjs-tooltip@0.1.8/dist/index.js"></script>
+
+<!-- Анимированный текст (typed.js) -->
+<script src="https://unpkg.com/grapesjs-typed@2.0.1/dist/index.js"></script>
+
+<!-- Более надёжный парсер CSS при импорте / вставке кода -->
+<script src="https://unpkg.com/grapesjs-parser-postcss@1.0.3/dist/index.js"></script>
+
+<!-- Стили: градиент -->
+<script src="https://unpkg.com/grapesjs-style-gradient@3.0.3/dist/index.js"></script>
+
+<!-- Стили: фон (цвет/картинка/градиент в одном свойстве) -->
+<script src="https://unpkg.com/grapesjs-style-bg@2.0.2/dist/index.js"></script>
+
+<!-- Стили: CSS-фильтры (blur, brightness, contrast...) -->
+<script src="https://unpkg.com/grapesjs-style-filter@1.0.2/dist/index.js"></script>
+
+<!-- Экспорт в ZIP -->
+<script src="https://unpkg.com/grapesjs-plugin-export@1.0.12/dist/index.js"></script>
+
+<!-- TOAST UI Image Editor (редактирование изображений прямо в холсте) -->
+<script src="https://unpkg.com/grapesjs-tui-image-editor@1.0.2/dist/index.js"></script>
+
+<!--
+     НАШИ ПЛАГИНЫ — npm-пакеты с CDN jsDelivr, версии закреплены (как у
+     официальных выше). Все — UMD-сборки (*.umd.js, обычный <script>, не
+     module; не *.umd.cjs — его CDN отдаёт как application/node, и браузер
+     его не выполняет), подключаются ПОСЛЕ grapes.min.js: каждая регистрирует себя в
+     grapesjs.plugins под своим npm-именем, поэтому ниже в plugins/pluginsOpts
+     они пишутся строками. Исходники — C:\OSPanel6\home\grapesjs-plugins.
+     Обновить плагин = поменять версию в его строке.
+     Описание опций — README пакета на npmjs.com и форма ⚙ в менеджере плагинов.
+-->
+<script src="https://cdn.jsdelivr.net/npm/grapesjs-plugins-manager@1.1.1/dist/grapesjs-plugins-manager.umd.js"></script> <!-- менеджер плагинов -->
+<script src="https://cdn.jsdelivr.net/npm/grapesjs-cloud-assets@0.10.1/dist/grapesjs-cloud-assets.umd.js"></script>   <!-- медиа из облаков -->
+<script src="https://cdn.jsdelivr.net/npm/grapesjs-sidebar-tools@2.3.1/dist/grapesjs-sidebar-tools.umd.js"></script>  <!-- панели, устройства, вкладки -->
+<script src="https://cdn.jsdelivr.net/npm/grapesjs-context-menu@1.3.1/dist/grapesjs-context-menu.umd.js"></script>    <!-- меню по ПКМ, бейдж иерархии -->
+<script src="https://cdn.jsdelivr.net/npm/grapesjs-export-jsx@1.1.1/dist/grapesjs-export-jsx.umd.js"></script>        <!-- экспорт в React (JSX + CSS) -->
+<script src="https://cdn.jsdelivr.net/npm/grapesjs-site-pages@2.8.1/dist/grapesjs-pages.umd.js"></script>             <!-- страницы, лэйауты, шаблоны, компоненты -->
+<script src="https://cdn.jsdelivr.net/npm/grapesjs-blueprints@0.3.1/dist/grapesjs-scripts.umd.js"></script>           <!-- блюпринты, JS/CSS, CDN-библиотеки -->
+<script src="https://cdn.jsdelivr.net/npm/grapesjs-storage@0.3.1/dist/grapesjs-storage.umd.js"></script>              <!-- контент записей по шаблонам -->
+<script src="https://cdn.jsdelivr.net/npm/grapesjs-fonts@0.3.1/dist/grapesjs-fonts.umd.js"></script>                  <!-- шрифты Google / Fontshare / Fontsource / Bunny -->
+<script src="https://cdn.jsdelivr.net/npm/grapesjs-ruler@0.3.1/dist/grapesjs-ruler.umd.js"></script>                  <!-- линейки, перекрестие, направляющие -->
+
+
+<!-- =========================================================
+     ИНИЦИАЛИЗАЦИЯ
+========================================================= -->
+
+<script>
+
+const editor = grapesjs.init(grapesjsPluginsManager.configure({
+
+    container: '#gjs',
+
+    height: '100vh',
+
+    width: 'auto',
+
+    storageManager: false,
+
+    telemetry: false,
+
+
+    /*
+     * Плагины — по именам npm-пакетов, одинаково для официальных и наших.
+     *
+     * Официальные плагины GrapesJS (unpkg-скрипты) регистрируют себя в window
+     * под полным именем пакета ('grapesjs-navbar', 'grapesjs-style-bg', …;
+     * исключение — 'gjs-blocks-basic'). Наши UMD-сборки (контракт плагинов
+     * grapesjs-plugins-manager) регистрируют себя в grapesjs.plugins под своим
+     * npm-именем. Строка, которой нет ни там, ни там, тихо пропускается
+     * (в консоли "Plugin ... not found").
+     *
+     * Всё init-окружение обёрнуто в grapesjsPluginsManager.configure(): он
+     * убирает плагины, выключенные в менеджере, и подмешивает в pluginsOpts
+     * параметры, изменённые в менеджере (⚙ у плагина в списке).
+     */
+    plugins: [
+
+        'grapesjs-plugins-manager',   // первым: управляет остальными
+
+        // официальные
+        'grapesjs-preset-webpage',
+        'gjs-blocks-basic',
+        'grapesjs-plugin-forms',
+        'grapesjs-navbar',
+        'grapesjs-tabs',
+        'grapesjs-component-countdown',
+        'grapesjs-custom-code',
+        'grapesjs-tooltip',
+        'grapesjs-typed',
+        'grapesjs-parser-postcss',
+        'grapesjs-style-gradient',
+        'grapesjs-style-bg',
+        'grapesjs-style-filter',
+        'grapesjs-plugin-export',
+        'grapesjs-tui-image-editor',
+
+        // наши (npm, исходники в grapesjs-plugins/)
+        'grapesjs-cloud-assets',      // медиа из облаков
+        'grapesjs-sidebar-tools',     // панели, устройства, рабочая область
+        'grapesjs-context-menu',      // меню по ПКМ
+        'grapesjs-export-jsx',        // экспорт в React
+        'grapesjs-site-pages',        // страницы, лэйауты, шаблоны, компоненты
+        'grapesjs-blueprints',        // блюпринты, JS/CSS
+        'grapesjs-storage',           // контент записей; после pages
+        'grapesjs-fonts',             // шрифты
+        'grapesjs-ruler'              // линейки и направляющие
+
+    ],
+
+
+    pluginsOpts: {
+
+        'grapesjs-preset-webpage': {
+            blocks: ['link-block', 'quote', 'text-basic'],
+            modalImportTitle: 'Импорт кода',
+            modalImportButton: 'Импортировать',
+            modalImportLabel: 'Вставьте сюда HTML/CSS для импорта в холст',
+            modalImportContent: editor => editor.getHtml() + '<style>' + editor.getCss() + '</style>'
+        },
+
+        'gjs-blocks-basic': {
+            flexGrid: true
+        },
+
+        'grapesjs-plugin-forms': {
+            blocks: [
+                'form',
+                'input',
+                'textarea',
+                'select',
+                'checkbox',
+                'radio',
+                'button'
+            ]
+        },
+
+        'grapesjs-navbar': {},
+
+        'grapesjs-tabs': {},
+
+        'grapesjs-component-countdown': {
+            startTime: '2027-01-01 00:00'
+        },
+
+        'grapesjs-custom-code': {},
+
+        'grapesjs-tooltip': {},
+
+        'grapesjs-typed': {},
+
+        'grapesjs-parser-postcss': {},
+
+        'grapesjs-style-gradient': {},
+
+        'grapesjs-style-bg': {},
+
+        'grapesjs-style-filter': {},
+
+        'grapesjs-plugin-export': {
+            btnLabel: 'Экспорт в ZIP'
+        },
+
+        'grapesjs-tui-image-editor': {},
+
+        /*
+         * Наши плагины — тоже по имени. Полный список опций каждого виден в
+         * менеджере плагинов (⚙) и в README плагина.
+         */
+
+        /*
+         * Провайдеры — по id: 'dropbox', 'google-drive', 'onedrive', 'box'
+         * (или { type: 'box', tokenEndpoint: '/api/box-token' }). Ключей
+         * приложений в коде нет: при первом открытии вкладки плагин сам
+         * показывает мастер настройки, ключ хранится в localStorage.
+         */
+        'grapesjs-cloud-assets': {
+            providers: ['dropbox', 'google-drive', 'onedrive', 'box']
+        },
+
+        // тексты — из переводов по языку редактора; свои: labels: { styleManagerTab: 'Стили' }
+        'grapesjs-sidebar-tools': {},
+
+        'grapesjs-context-menu': {
+            blocks: null,            // null = все блоки в "Добавить элемент"
+            canvasMenu: true,        // ПКМ на холсте
+            layersMenu: true,        // ПКМ в Layer Manager
+            hierarchyBadge: true,    // бейдж "Имя ▾" над выделенным элементом
+            viewStylesCommand: 'layers-sidebar:show-styles' // команда grapesjs-sidebar-tools
+        },
+
+        'grapesjs-export-jsx': {
+            componentName: 'Page',   // имя компонента и файлов Page.jsx / Page.css
+            cssImport: true,         // import './Page.css' в начале модуля
+            reactImport: true,       // import React (не нужен при новом JSX-рантайме)
+            wrapper: 'fragment',     // корень страницы: <>…</> или 'div'
+            button: true             // кнопка в панели options
+        },
+
+        // serverUrl — REST API для синхронизации (openapi.yaml в пакете grapesjs-site-pages)
+        'grapesjs-site-pages': {
+            // serverUrl: 'https://example.com/api/v1'
+        },
+
+        // поиск CDN-библиотек — через PHP-прокси (proxy/libs-proxy.php из пакета grapesjs-blueprints)
+        'grapesjs-blueprints': {
+            libraries: { proxy: '/proxy/libs-proxy.php' }
+        },
+
+        // без rest — локально в IndexedDB
+        'grapesjs-storage': {
+            // rest: { url: '/admin/cms/content' }
+        },
+
+        // каталоги шрифтов — через PHP-прокси (proxy/fonts-proxy.php из пакета grapesjs-fonts)
+        'grapesjs-fonts': {
+            proxy: '/proxy/fonts-proxy.php'
+        },
+
+        // crosshair: 'full' | 'cursor' | false; keymap: '⌘+shift+r, ctrl+shift+r'
+        'grapesjs-ruler': {},
+
+        'grapesjs-plugins-manager': {}
+
+    },
+
+
+    /*
+     * Devices
+     */
+
+    deviceManager: {
+
+        devices: [
+
+            {
+                id: 'desktop',
+
+                name: 'Desktop',
+
+                width: ''
+
+            },
+
+            {
+                id: 'tablet',
+
+                name: 'Tablet',
+
+                width: '768px',
+
+                widthMedia: '992px'
+
+            },
+
+            {
+                id: 'mobile',
+
+                name: 'Mobile',
+
+                width: '375px',
+
+                widthMedia: '767px'
+
+            }
+
+        ]
+
+    },
+
+
+    /*
+     * Начальная разметка холста — обычная страница
+     */
+
+    components: `
+
+        <header class="header">
+
+            <div class="container">
+
+                <nav>
+
+                    <a href="#" class="logo">
+                        My Website
+                    </a>
+
+                    <div class="menu">
+
+                        <a href="#">
+                            Home
+                        </a>
+
+                        <a href="#">
+                            About
+                        </a>
+
+                        <a href="#">
+                            Contact
+                        </a>
+
+                    </div>
+
+                </nav>
+
+            </div>
+
+        </header>
+
+
+        <main>
+
+            <section class="hero">
+
+                <div class="container">
+
+                    <h1>
+                        GrapesJS
+                    </h1>
+
+                    <p>
+                        Visual Web Builder — со всеми официальными
+                        бесплатными плагинами.
+                    </p>
+
+                    <button>
+                        Get Started
+                    </button>
+
+                </div>
+
+            </section>
+
+
+            <section>
+
+                <div class="container">
+
+                    <h2>
+                        Features
+                    </h2>
+
+                    <div class="grid">
+
+                        <div>
+
+                            <h3>
+                                Blocks
+                            </h3>
+
+                            <p>
+                                Drag and drop components.
+                            </p>
+
+                        </div>
+
+
+                        <div>
+
+                            <h3>
+                                Responsive
+                            </h3>
+
+                            <p>
+                                Desktop, tablet and mobile.
+                            </p>
+
+                        </div>
+
+
+                        <div>
+
+                            <h3>
+                                Styling
+                            </h3>
+
+                            <p>
+                                Full CSS Style Manager: gradient,
+                                background, filters.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <img
+                        src="https://picsum.photos/800/500"
+                        alt="Demo image"
+                        style="max-width:100%;margin-top:40px;border-radius:8px;"
+                    >
+
+                    <p style="color:#666;font-size:14px;">
+                        ↑ Дважды кликните по картинке — откроется
+                        TOAST UI Image Editor.
+                    </p>
+
+                </div>
+
+            </section>
+
+        </main>
+
+
+        <footer>
+
+            <div class="container">
+
+                Footer
+                &middot;
+                Используйте кнопку "Export ZIP" и "Импорт" на
+                верхней панели, чтобы проверить экспорт/импорт кода.
+
+            </div>
+
+        </footer>
+
+    `,
+
+
+    /*
+     * Начальный CSS
+     */
+
+    style: `
+
+        * {
+            box-sizing: border-box;
+        }
+
+
+        body {
+
+            margin: 0;
+
+            font-family:
+                Arial,
+                sans-serif;
+
+            color: #222;
+
+        }
+
+
+        .container {
+
+            width: 100%;
+
+            max-width: 1200px;
+
+            margin: auto;
+
+            padding:
+                0 30px;
+
+        }
+
+
+        .header {
+
+            padding:
+                20px 0;
+
+            border-bottom:
+                1px solid #ddd;
+
+        }
+
+
+        nav {
+
+            display: flex;
+
+            justify-content:
+                space-between;
+
+            align-items:
+                center;
+
+        }
+
+
+        .logo {
+
+            font-size:
+                22px;
+
+            font-weight:
+                700;
+
+            color:
+                #222;
+
+            text-decoration:
+                none;
+
+        }
+
+
+        .menu {
+
+            display: flex;
+
+            gap:
+                20px;
+
+        }
+
+
+        .menu a {
+
+            color:
+                #222;
+
+            text-decoration:
+                none;
+
+        }
+
+
+        .hero {
+
+            padding:
+                120px 0;
+
+            text-align:
+                center;
+
+            background:
+                #f3f4f6;
+
+        }
+
+
+        .hero h1 {
+
+            margin:
+                0 0 20px;
+
+            font-size:
+                56px;
+
+        }
+
+
+        .hero p {
+
+            font-size:
+                20px;
+
+            margin:
+                0 0 30px;
+
+        }
+
+
+        button {
+
+            padding:
+                12px 24px;
+
+            border:
+                0;
+
+            border-radius:
+                6px;
+
+            background:
+                #222;
+
+            color:
+                white;
+
+            cursor:
+                pointer;
+
+        }
+
+
+        section {
+
+            padding:
+                80px 0;
+
+        }
+
+
+        .grid {
+
+            display:
+                grid;
+
+            grid-template-columns:
+                repeat(3, 1fr);
+
+            gap:
+                30px;
+
+        }
+
+
+        footer {
+
+            padding:
+                50px 0;
+
+            background:
+                #111;
+
+            color:
+                white;
+
+        }
+
+    `
+
+}));
+
+window.editor = editor;
+
+
+/*
+ * ==========================================================
+ * ДЕМО-СЕКЦИИ: показываем "живьём" блок каждого плагина,
+ * который не входит в стандартный набор blocks-basic, сразу
+ * на холсте — чтобы сразу видеть, что все плагины реально
+ * подключились и работают, а не только доступны в панели
+ * блоков справа.
+ * ==========================================================
+ */
+
+const bm = editor.Blocks;
+const wrapper = editor.getWrapper();
+
+function addPluginDemo(title, blockId) {
+
+    const block = bm.get(blockId);
+
+    if (!block) {
+        console.warn('[demo] Блок "' + blockId + '" не найден — плагин не подключился.');
+        return;
+    }
+
+    let content = block.get('content');
+
+    if (typeof content === 'function') {
+        content = content(editor);
+    }
+
+    /*
+     * ВАЖНО: Component.find(selector) работает только с уже
+     * отрендеренным компонентом (так и написано в исходниках
+     * GrapesJS), а сразу после append() вид ещё не готов — поэтому
+     * find('.container') возвращал [] и .append() падал на
+     * undefined. Правильно — использовать то, что append() и так
+     * возвращает напрямую, без похода через find().
+     */
+
+    const [section] = wrapper.append({
+        tagName: 'section',
+        attributes: { class: 'demo-section' }
+    });
+
+    const [container] = section.append({
+        tagName: 'div',
+        attributes: { class: 'container' }
+    });
+
+    container.append({
+        tagName: 'span',
+        attributes: { class: 'demo-tag' },
+        components: title
+    });
+
+    container.append(content);
+}
+
+addPluginDemo('grapesjs-navbar', 'navbar');
+addPluginDemo('grapesjs-tabs', 'tabs');
+addPluginDemo('grapesjs-component-countdown', 'countdown');
+addPluginDemo('grapesjs-typed', 'typed');
+addPluginDemo('grapesjs-tooltip', 'tooltip');
+addPluginDemo('grapesjs-custom-code', 'custom-code');
+addPluginDemo('grapesjs-plugin-forms: form', 'form');
+
+
+/*
+ * Для DevTools
+ */
+
+console.log('GrapesJS:', editor);
+/*
+ * editor.Plugins не существует — плагины на самом инстансе редактора
+ * нигде отдельным реестром не хранятся (window.grapesjs.plugins —
+ * это глобальный реестр ОПРЕДЕЛЕНИЙ плагинов через .add(), а не
+ * список того, что загружено в этот editor). Проще и надёжнее —
+ * посмотреть на тот же массив, что передан в конфиг ниже.
+ */
+console.log('Плагины в конфиге:', editor.getConfig().plugins);
+
+</script>
+
+</body>
+</html>
