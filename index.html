@@ -143,15 +143,17 @@
      Описание опций — README пакета на npmjs.com и форма ⚙ в менеджере плагинов.
 -->
 <script src="https://cdn.jsdelivr.net/npm/grapesjs-plugins-manager@1.1.1/dist/grapesjs-plugins-manager.umd.js"></script> <!-- менеджер плагинов -->
-<script src="https://cdn.jsdelivr.net/npm/grapesjs-cloud-assets@0.10.1/dist/grapesjs-cloud-assets.umd.js"></script>   <!-- медиа из облаков -->
-<script src="https://cdn.jsdelivr.net/npm/grapesjs-sidebar-tools@2.3.1/dist/grapesjs-sidebar-tools.umd.js"></script>  <!-- панели, устройства, вкладки -->
+<script src="https://cdn.jsdelivr.net/npm/grapesjs-cloud-assets@0.11.0/dist/grapesjs-cloud-assets.umd.js"></script>   <!-- медиа из облаков -->
+<script src="https://cdn.jsdelivr.net/npm/grapesjs-sidebar-tools@2.5.0/dist/grapesjs-sidebar-tools.umd.js"></script>  <!-- панели, устройства, вкладки -->
 <script src="https://cdn.jsdelivr.net/npm/grapesjs-context-menu@1.3.1/dist/grapesjs-context-menu.umd.js"></script>    <!-- меню по ПКМ, бейдж иерархии -->
 <script src="https://cdn.jsdelivr.net/npm/grapesjs-export-jsx@1.1.1/dist/grapesjs-export-jsx.umd.js"></script>        <!-- экспорт в React (JSX + CSS) -->
-<script src="https://cdn.jsdelivr.net/npm/grapesjs-site-pages@2.8.1/dist/grapesjs-pages.umd.js"></script>             <!-- страницы, лэйауты, шаблоны, компоненты -->
-<script src="https://cdn.jsdelivr.net/npm/grapesjs-blueprints@0.3.1/dist/grapesjs-scripts.umd.js"></script>           <!-- блюпринты, JS/CSS, CDN-библиотеки -->
-<script src="https://cdn.jsdelivr.net/npm/grapesjs-storage@0.3.1/dist/grapesjs-storage.umd.js"></script>              <!-- контент записей по шаблонам -->
+<script src="https://cdn.jsdelivr.net/npm/grapesjs-site-pages@2.16.0/dist/grapesjs-pages.umd.js"></script>             <!-- страницы, лэйауты, шаблоны, компоненты -->
+<script src="https://cdn.jsdelivr.net/npm/grapesjs-blueprints@0.5.0/dist/grapesjs-scripts.umd.js"></script>           <!-- блюпринты, JS/CSS, CDN-библиотеки -->
+<script src="https://cdn.jsdelivr.net/npm/grapesjs-storage@1.6.0/dist/grapesjs-storage.umd.js"></script>              <!-- контент записей по шаблонам -->
 <script src="https://cdn.jsdelivr.net/npm/grapesjs-fonts@0.3.1/dist/grapesjs-fonts.umd.js"></script>                  <!-- шрифты Google / Fontshare / Fontsource / Bunny -->
 <script src="https://cdn.jsdelivr.net/npm/grapesjs-ruler@0.3.1/dist/grapesjs-ruler.umd.js"></script>                  <!-- линейки, перекрестие, направляющие -->
+<script src="https://cdn.jsdelivr.net/npm/grapesjs-darkreader@0.1.0/dist/grapesjs-darkreader.umd.js"></script>        <!-- тёмная / светлая тема сайта (Dark Reader) -->
+<script src="https://cdn.jsdelivr.net/npm/grapesjs-forms@0.2.0/dist/grapesjs-forms.umd.js"></script>                  <!-- редактор форм, отправка заявок -->
 
 
 <!-- =========================================================
@@ -217,7 +219,9 @@ const editor = grapesjs.init(grapesjsPluginsManager.configure({
         'grapesjs-blueprints',        // блюпринты, JS/CSS
         'grapesjs-storage',           // контент записей; после pages
         'grapesjs-fonts',             // шрифты
-        'grapesjs-ruler'              // линейки и направляющие
+        'grapesjs-ruler',             // линейки и направляющие
+        'grapesjs-darkreader',        // тёмная / светлая тема сайта, кнопка темы
+        'grapesjs-forms'              // редактор форм, заявки на endpoint; после pages
 
     ],
 
@@ -332,6 +336,17 @@ const editor = grapesjs.init(grapesjsPluginsManager.configure({
 
         // crosshair: 'full' | 'cursor' | false; keymap: '⌘+shift+r, ctrl+shift+r'
         'grapesjs-ruler': {},
+
+        // вкладка «Тема» + блок «Theme toggle»; src — своя копия darkreader.js вместо jsDelivr
+        'grapesjs-darkreader': {},
+
+        // без rest — формы в IndexedDB; submitUrl — куда опубликованный сайт шлёт заявки
+        // (<submitUrl>/forms/<id>/submissions, контракт — openapi.yaml в пакете grapesjs-forms)
+        'grapesjs-forms': {
+            // submitUrl: 'https://example.com/api',
+            // rest: { url: '/admin/forms' }
+        },
+
 
         'grapesjs-plugins-manager': {}
 
